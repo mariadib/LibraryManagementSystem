@@ -31,14 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.booksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.borrowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.borrowToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.returnBookToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.penaltyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.payPenaltyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.txt_search = new System.Windows.Forms.TextBox();
@@ -62,66 +56,24 @@
             // 
             // booksToolStripMenuItem
             // 
-            this.booksToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addToolStripMenuItem,
-            this.editToolStripMenuItem,
-            this.deleteToolStripMenuItem});
             this.booksToolStripMenuItem.Name = "booksToolStripMenuItem";
             this.booksToolStripMenuItem.Size = new System.Drawing.Size(63, 24);
             this.booksToolStripMenuItem.Text = "Books";
-            // 
-            // addToolStripMenuItem
-            // 
-            this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(136, 26);
-            this.addToolStripMenuItem.Text = "Add";
-            // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(136, 26);
-            this.editToolStripMenuItem.Text = "Edit";
-            // 
-            // deleteToolStripMenuItem
-            // 
-            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(136, 26);
-            this.deleteToolStripMenuItem.Text = "Delete";
+            this.booksToolStripMenuItem.Click += new System.EventHandler(this.booksToolStripMenuItem_Click);
             // 
             // borrowToolStripMenuItem
             // 
-            this.borrowToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.borrowToolStripMenuItem1,
-            this.returnBookToolStripMenuItem});
             this.borrowToolStripMenuItem.Name = "borrowToolStripMenuItem";
-            this.borrowToolStripMenuItem.Size = new System.Drawing.Size(71, 24);
-            this.borrowToolStripMenuItem.Text = "Borrow";
-            // 
-            // borrowToolStripMenuItem1
-            // 
-            this.borrowToolStripMenuItem1.Name = "borrowToolStripMenuItem1";
-            this.borrowToolStripMenuItem1.Size = new System.Drawing.Size(178, 26);
-            this.borrowToolStripMenuItem1.Text = "Borrow Book";
-            // 
-            // returnBookToolStripMenuItem
-            // 
-            this.returnBookToolStripMenuItem.Name = "returnBookToolStripMenuItem";
-            this.returnBookToolStripMenuItem.Size = new System.Drawing.Size(178, 26);
-            this.returnBookToolStripMenuItem.Text = "Return Book";
+            this.borrowToolStripMenuItem.Size = new System.Drawing.Size(120, 24);
+            this.borrowToolStripMenuItem.Text = "Borrow/Return";
+            this.borrowToolStripMenuItem.Click += new System.EventHandler(this.borrowToolStripMenuItem_Click);
             // 
             // penaltyToolStripMenuItem
             // 
-            this.penaltyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.payPenaltyToolStripMenuItem});
             this.penaltyToolStripMenuItem.Name = "penaltyToolStripMenuItem";
             this.penaltyToolStripMenuItem.Size = new System.Drawing.Size(70, 24);
             this.penaltyToolStripMenuItem.Text = "Penalty";
-            // 
-            // payPenaltyToolStripMenuItem
-            // 
-            this.payPenaltyToolStripMenuItem.Name = "payPenaltyToolStripMenuItem";
-            this.payPenaltyToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
-            this.payPenaltyToolStripMenuItem.Text = "Pay Penalty";
+            this.penaltyToolStripMenuItem.Click += new System.EventHandler(this.penaltyToolStripMenuItem_Click);
             // 
             // contextMenuStrip1
             // 
@@ -163,6 +115,7 @@
             this.btn_searchb.TabIndex = 6;
             this.btn_searchb.Text = "search";
             this.btn_searchb.UseVisualStyleBackColor = true;
+            this.btn_searchb.Click += new System.EventHandler(this.btn_searchb_Click);
             // 
             // ManagenentSystem
             // 
@@ -192,15 +145,9 @@
         private System.Windows.Forms.ToolStripMenuItem borrowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem penaltyToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem borrowToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem payPenaltyToolStripMenuItem;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txt_search;
         private System.Windows.Forms.ListView lv_displayresult;
-        private System.Windows.Forms.ToolStripMenuItem returnBookToolStripMenuItem;
         private System.Windows.Forms.Button btn_searchb;
     }
 }
