@@ -40,7 +40,7 @@
                 | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(254, 35);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(280, 39);
+            this.label1.Size = new System.Drawing.Size(269, 38);
             this.label1.TabIndex = 0;
             this.label1.Text = "Hello , Welcome";
             // 
@@ -52,6 +52,7 @@
             this.btn_sign.TabIndex = 1;
             this.btn_sign.Text = "Signup";
             this.btn_sign.UseVisualStyleBackColor = true;
+            this.btn_sign.Click += new System.EventHandler(this.btn_sign_Click);
             // 
             // btn_log
             // 
@@ -61,6 +62,7 @@
             this.btn_log.TabIndex = 2;
             this.btn_log.Text = "Login";
             this.btn_log.UseVisualStyleBackColor = true;
+            this.btn_log.Click += new System.EventHandler(this.btn_log_Click);
             // 
             // Home
             // 

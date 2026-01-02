@@ -16,5 +16,17 @@ namespace LibraryManagementSystem
         {
             InitializeComponent();
         }
+
+        private void btn_sign_Click(object sender, EventArgs e)
+        {
+            SignUp s=new SignUp();  
+            s.Show();
+        }
+
+        private void btn_log_Click(object sender, EventArgs e)
+        {
+            Login l=new Login();
+            l.Show();
+        }
     }
 }
