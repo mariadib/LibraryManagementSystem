@@ -37,14 +37,14 @@
             this.dtp_checkoutdate = new System.Windows.Forms.DateTimePicker();
             this.txt_booksborrowed = new System.Windows.Forms.TextBox();
             this.txt_emails = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgv_borr = new System.Windows.Forms.DataGridView();
             this.btn_return = new System.Windows.Forms.Button();
             this.btn_borrow = new System.Windows.Forms.Button();
             this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Name12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Checkout = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Due = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_borr)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -54,7 +54,7 @@
                 | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(324, 23);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(234, 39);
+            this.label1.Size = new System.Drawing.Size(227, 38);
             this.label1.TabIndex = 0;
             this.label1.Text = "Borrow Form:";
             // 
@@ -123,20 +123,20 @@
             this.txt_emails.Size = new System.Drawing.Size(100, 22);
             this.txt_emails.TabIndex = 8;
             // 
-            // dataGridView1
+            // dgv_borr
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgv_borr.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_borr.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Email,
-            this.Name,
+            this.Name12,
             this.Checkout,
             this.Due});
-            this.dataGridView1.Location = new System.Drawing.Point(46, 183);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(554, 199);
-            this.dataGridView1.TabIndex = 9;
+            this.dgv_borr.Location = new System.Drawing.Point(46, 183);
+            this.dgv_borr.Name = "dgv_borr";
+            this.dgv_borr.RowHeadersWidth = 51;
+            this.dgv_borr.RowTemplate.Height = 24;
+            this.dgv_borr.Size = new System.Drawing.Size(554, 199);
+            this.dgv_borr.TabIndex = 9;
             // 
             // btn_return
             // 
@@ -163,12 +163,12 @@
             this.Email.Name = "Email";
             this.Email.Width = 125;
             // 
-            // Name
+            // Name12
             // 
-            this.Name.HeaderText = "BookName";
-            this.Name.MinimumWidth = 6;
-            this.Name.Name = "Name";
-            this.Name.Width = 125;
+            this.Name12.HeaderText = "BookName";
+            this.Name12.MinimumWidth = 6;
+            this.Name12.Name = "Name12";
+            this.Name12.Width = 125;
             // 
             // Checkout
             // 
@@ -191,7 +191,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btn_borrow);
             this.Controls.Add(this.btn_return);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgv_borr);
             this.Controls.Add(this.txt_emails);
             this.Controls.Add(this.txt_booksborrowed);
             this.Controls.Add(this.dtp_checkoutdate);
@@ -203,7 +203,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Borrow";
             this.Text = "Borrow";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_borr)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -220,11 +220,11 @@
         private System.Windows.Forms.DateTimePicker dtp_checkoutdate;
         private System.Windows.Forms.TextBox txt_booksborrowed;
         private System.Windows.Forms.TextBox txt_emails;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgv_borr;
         private System.Windows.Forms.Button btn_return;
         private System.Windows.Forms.Button btn_borrow;
         private System.Windows.Forms.DataGridViewTextBoxColumn Email;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Name12;
         private System.Windows.Forms.DataGridViewTextBoxColumn Checkout;
         private System.Windows.Forms.DataGridViewTextBoxColumn Due;
     }

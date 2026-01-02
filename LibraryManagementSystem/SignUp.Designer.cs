@@ -45,7 +45,7 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(348, 23);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(146, 39);
+            this.label1.Size = new System.Drawing.Size(140, 38);
             this.label1.TabIndex = 0;
             this.label1.Text = "SignUp:";
             // 
@@ -111,6 +111,7 @@
             this.btn_signup.TabIndex = 7;
             this.btn_signup.Text = "SignUp";
             this.btn_signup.UseVisualStyleBackColor = true;
+            this.btn_signup.Click += new System.EventHandler(this.btn_signup_Click);
             // 
             // lb_login
             // 
@@ -121,6 +122,7 @@
             this.lb_login.TabIndex = 9;
             this.lb_login.TabStop = true;
             this.lb_login.Text = "Already have an account? Login";
+            this.lb_login.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lb_login_LinkClicked);
             // 
             // SignUp
             // 
