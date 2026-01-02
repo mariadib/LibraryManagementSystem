@@ -42,15 +42,16 @@
             this.txt_available = new System.Windows.Forms.TextBox();
             this.cb_category = new System.Windows.Forms.ComboBox();
             this.dgv_display = new System.Windows.Forms.DataGridView();
-            this.btn_add = new System.Windows.Forms.Button();
-            this.btn_edit = new System.Windows.Forms.Button();
-            this.btn_delete = new System.Windows.Forms.Button();
             this.ISBN = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Author = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Category = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Available = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_add = new System.Windows.Forms.Button();
+            this.btn_edit = new System.Windows.Forms.Button();
+            this.btn_delete = new System.Windows.Forms.Button();
+            this.btn_exit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_display)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,7 +62,7 @@
                 | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(257, 32);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(202, 39);
+            this.label1.Size = new System.Drawing.Size(196, 38);
             this.label1.TabIndex = 0;
             this.label1.Text = "Book Form:";
             // 
@@ -135,14 +136,14 @@
             // 
             // txt_author
             // 
-            this.txt_author.Location = new System.Drawing.Point(611, 96);
+            this.txt_author.Location = new System.Drawing.Point(353, 159);
             this.txt_author.Name = "txt_author";
             this.txt_author.Size = new System.Drawing.Size(100, 22);
             this.txt_author.TabIndex = 9;
             // 
             // txt_total
             // 
-            this.txt_total.Location = new System.Drawing.Point(350, 162);
+            this.txt_total.Location = new System.Drawing.Point(587, 99);
             this.txt_total.Name = "txt_total";
             this.txt_total.Size = new System.Drawing.Size(100, 22);
             this.txt_total.TabIndex = 10;
@@ -161,6 +162,7 @@
             this.cb_category.Name = "cb_category";
             this.cb_category.Size = new System.Drawing.Size(121, 24);
             this.cb_category.TabIndex = 12;
+            this.cb_category.SelectedIndexChanged += new System.EventHandler(this.cb_category_SelectedIndexChanged);
             // 
             // dgv_display
             // 
@@ -172,39 +174,12 @@
             this.Category,
             this.Total,
             this.Available});
-            this.dgv_display.Location = new System.Drawing.Point(12, 235);
+            this.dgv_display.Location = new System.Drawing.Point(12, 222);
             this.dgv_display.Name = "dgv_display";
             this.dgv_display.RowHeadersWidth = 51;
             this.dgv_display.RowTemplate.Height = 24;
             this.dgv_display.Size = new System.Drawing.Size(804, 276);
             this.dgv_display.TabIndex = 13;
-            // 
-            // btn_add
-            // 
-            this.btn_add.Location = new System.Drawing.Point(15, 561);
-            this.btn_add.Name = "btn_add";
-            this.btn_add.Size = new System.Drawing.Size(75, 23);
-            this.btn_add.TabIndex = 14;
-            this.btn_add.Text = "Add";
-            this.btn_add.UseVisualStyleBackColor = true;
-            // 
-            // btn_edit
-            // 
-            this.btn_edit.Location = new System.Drawing.Point(264, 561);
-            this.btn_edit.Name = "btn_edit";
-            this.btn_edit.Size = new System.Drawing.Size(75, 23);
-            this.btn_edit.TabIndex = 15;
-            this.btn_edit.Text = "Edit";
-            this.btn_edit.UseVisualStyleBackColor = true;
-            // 
-            // btn_delete
-            // 
-            this.btn_delete.Location = new System.Drawing.Point(136, 561);
-            this.btn_delete.Name = "btn_delete";
-            this.btn_delete.Size = new System.Drawing.Size(75, 23);
-            this.btn_delete.TabIndex = 16;
-            this.btn_delete.Text = "Delete";
-            this.btn_delete.UseVisualStyleBackColor = true;
             // 
             // ISBN
             // 
@@ -248,11 +223,52 @@
             this.Available.Name = "Available";
             this.Available.Width = 125;
             // 
+            // btn_add
+            // 
+            this.btn_add.Location = new System.Drawing.Point(15, 553);
+            this.btn_add.Name = "btn_add";
+            this.btn_add.Size = new System.Drawing.Size(75, 31);
+            this.btn_add.TabIndex = 14;
+            this.btn_add.Text = "Add";
+            this.btn_add.UseVisualStyleBackColor = true;
+            this.btn_add.Click += new System.EventHandler(this.btn_add_Click);
+            // 
+            // btn_edit
+            // 
+            this.btn_edit.Location = new System.Drawing.Point(264, 553);
+            this.btn_edit.Name = "btn_edit";
+            this.btn_edit.Size = new System.Drawing.Size(75, 31);
+            this.btn_edit.TabIndex = 15;
+            this.btn_edit.Text = "Edit";
+            this.btn_edit.UseVisualStyleBackColor = true;
+            this.btn_edit.Click += new System.EventHandler(this.btn_edit_Click);
+            // 
+            // btn_delete
+            // 
+            this.btn_delete.Location = new System.Drawing.Point(136, 553);
+            this.btn_delete.Name = "btn_delete";
+            this.btn_delete.Size = new System.Drawing.Size(75, 31);
+            this.btn_delete.TabIndex = 16;
+            this.btn_delete.Text = "Delete";
+            this.btn_delete.UseVisualStyleBackColor = true;
+            this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
+            // 
+            // btn_exit
+            // 
+            this.btn_exit.Location = new System.Drawing.Point(378, 553);
+            this.btn_exit.Name = "btn_exit";
+            this.btn_exit.Size = new System.Drawing.Size(75, 31);
+            this.btn_exit.TabIndex = 17;
+            this.btn_exit.Text = "Exit";
+            this.btn_exit.UseVisualStyleBackColor = true;
+            this.btn_exit.Click += new System.EventHandler(this.btn_exit_Click);
+            // 
             // Book
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(969, 678);
+            this.Controls.Add(this.btn_exit);
             this.Controls.Add(this.btn_delete);
             this.Controls.Add(this.btn_edit);
             this.Controls.Add(this.btn_add);
@@ -303,5 +319,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Category;
         private System.Windows.Forms.DataGridViewTextBoxColumn Total;
         private System.Windows.Forms.DataGridViewTextBoxColumn Available;
+        private System.Windows.Forms.Button btn_exit;
     }
 }
