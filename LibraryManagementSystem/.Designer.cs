@@ -1,6 +1,6 @@
 ﻿namespace LibraryManagementSystem
 {
-    partial class Form1
+    partial class Resetpass
     {
         /// <summary>
         /// Required designer variable.
@@ -42,7 +42,7 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(205, 32);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(374, 39);
+            this.label1.Size = new System.Drawing.Size(364, 38);
             this.label1.TabIndex = 0;
             this.label1.Text = "Reset Your Password:";
             // 
@@ -90,6 +90,7 @@
             this.btn_reset.TabIndex = 5;
             this.btn_reset.Text = "Reset Password";
             this.btn_reset.UseVisualStyleBackColor = true;
+            this.btn_reset.Click += new System.EventHandler(this.btn_reset_Click);
             // 
             // Form1
             // 

@@ -45,6 +45,7 @@
             this.txt_users.Name = "txt_users";
             this.txt_users.Size = new System.Drawing.Size(432, 34);
             this.txt_users.TabIndex = 3;
+            this.txt_users.TextChanged += new System.EventHandler(this.txt_users_TextChanged);
             // 
             // txt_passwords
             // 
@@ -62,6 +63,7 @@
             this.btn_login.TabIndex = 5;
             this.btn_login.Text = "login";
             this.btn_login.UseVisualStyleBackColor = true;
+            this.btn_login.Click += new System.EventHandler(this.btn_login_Click);
             // 
             // label1
             // 
@@ -102,6 +104,7 @@
             this.lb_signup.TabIndex = 11;
             this.lb_signup.TabStop = true;
             this.lb_signup.Text = "Don\'t have an account?SignUp";
+            this.lb_signup.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lb_signup_LinkClicked);
             // 
             // lb_forgetpass
             // 
@@ -112,6 +115,7 @@
             this.lb_forgetpass.TabIndex = 12;
             this.lb_forgetpass.TabStop = true;
             this.lb_forgetpass.Text = "Forget Password?";
+            this.lb_forgetpass.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lb_forgetpass_LinkClicked);
             // 
             // Login
             // 

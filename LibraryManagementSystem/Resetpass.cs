@@ -10,11 +10,17 @@ using System.Windows.Forms;
 
 namespace LibraryManagementSystem
 {
-    public partial class Form1 : Form
+    public partial class Resetpass : Form
     {
-        public Form1()
+        public Resetpass()
         {
             InitializeComponent();
+        }
+        
+
+        private void btn_reset_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

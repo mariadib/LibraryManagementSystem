@@ -177,11 +177,11 @@
     <Compile Include="Borrow.Designer.cs">
       <DependentUpon>Borrow.cs</DependentUpon>
     </Compile>
-    <Compile Include="forgetpass.cs">
+    <Compile Include="Resetpass.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include=".Designer.cs">
-      <DependentUpon>forgetpass.cs</DependentUpon>
+      <DependentUpon>Resetpass.cs</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Home.cs">
@@ -222,8 +222,8 @@
     <EmbeddedResource Include="Borrow.resx">
       <DependentUpon>Borrow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="forgetpass.resx">
-      <DependentUpon>forgetpass.cs</DependentUpon>
+    <EmbeddedResource Include="Resetpass.resx">
+      <DependentUpon>Resetpass.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
