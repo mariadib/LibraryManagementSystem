@@ -42,16 +42,19 @@
             this.txt_available = new System.Windows.Forms.TextBox();
             this.cb_category = new System.Windows.Forms.ComboBox();
             this.dgv_display = new System.Windows.Forms.DataGridView();
-            this.ISBN = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Author = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Category = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Available = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btn_add = new System.Windows.Forms.Button();
             this.btn_edit = new System.Windows.Forms.Button();
             this.btn_delete = new System.Windows.Forms.Button();
             this.btn_exit = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txt_price = new System.Windows.Forms.TextBox();
+            this.ISBN = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Author = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Category = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Available = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_display)).BeginInit();
             this.SuspendLayout();
             // 
@@ -172,56 +175,15 @@
             this.Title,
             this.Author,
             this.Category,
+            this.price,
             this.Total,
             this.Available});
             this.dgv_display.Location = new System.Drawing.Point(12, 222);
             this.dgv_display.Name = "dgv_display";
             this.dgv_display.RowHeadersWidth = 51;
             this.dgv_display.RowTemplate.Height = 24;
-            this.dgv_display.Size = new System.Drawing.Size(804, 276);
+            this.dgv_display.Size = new System.Drawing.Size(926, 276);
             this.dgv_display.TabIndex = 13;
-            // 
-            // ISBN
-            // 
-            this.ISBN.HeaderText = "ISBN";
-            this.ISBN.MinimumWidth = 6;
-            this.ISBN.Name = "ISBN";
-            this.ISBN.Width = 125;
-            // 
-            // Title
-            // 
-            this.Title.HeaderText = "Title";
-            this.Title.MinimumWidth = 6;
-            this.Title.Name = "Title";
-            this.Title.Width = 125;
-            // 
-            // Author
-            // 
-            this.Author.HeaderText = "Author";
-            this.Author.MinimumWidth = 6;
-            this.Author.Name = "Author";
-            this.Author.Width = 125;
-            // 
-            // Category
-            // 
-            this.Category.HeaderText = "Category";
-            this.Category.MinimumWidth = 6;
-            this.Category.Name = "Category";
-            this.Category.Width = 125;
-            // 
-            // Total
-            // 
-            this.Total.HeaderText = "Total Copies";
-            this.Total.MinimumWidth = 6;
-            this.Total.Name = "Total";
-            this.Total.Width = 125;
-            // 
-            // Available
-            // 
-            this.Available.HeaderText = "Available Copies";
-            this.Available.MinimumWidth = 6;
-            this.Available.Name = "Available";
-            this.Available.Width = 125;
             // 
             // btn_add
             // 
@@ -263,11 +225,78 @@
             this.btn_exit.UseVisualStyleBackColor = true;
             this.btn_exit.Click += new System.EventHandler(this.btn_exit_Click);
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(747, 107);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(41, 16);
+            this.label8.TabIndex = 18;
+            this.label8.Text = "Price:";
+            // 
+            // txt_price
+            // 
+            this.txt_price.Location = new System.Drawing.Point(794, 104);
+            this.txt_price.Name = "txt_price";
+            this.txt_price.Size = new System.Drawing.Size(100, 22);
+            this.txt_price.TabIndex = 19;
+            // 
+            // ISBN
+            // 
+            this.ISBN.HeaderText = "ISBN";
+            this.ISBN.MinimumWidth = 6;
+            this.ISBN.Name = "ISBN";
+            this.ISBN.Width = 125;
+            // 
+            // Title
+            // 
+            this.Title.HeaderText = "Title";
+            this.Title.MinimumWidth = 6;
+            this.Title.Name = "Title";
+            this.Title.Width = 125;
+            // 
+            // Author
+            // 
+            this.Author.HeaderText = "Author";
+            this.Author.MinimumWidth = 6;
+            this.Author.Name = "Author";
+            this.Author.Width = 125;
+            // 
+            // Category
+            // 
+            this.Category.HeaderText = "Category";
+            this.Category.MinimumWidth = 6;
+            this.Category.Name = "Category";
+            this.Category.Width = 125;
+            // 
+            // price
+            // 
+            this.price.HeaderText = "Price";
+            this.price.MinimumWidth = 6;
+            this.price.Name = "price";
+            this.price.Width = 125;
+            // 
+            // Total
+            // 
+            this.Total.HeaderText = "Total Copies";
+            this.Total.MinimumWidth = 6;
+            this.Total.Name = "Total";
+            this.Total.Width = 125;
+            // 
+            // Available
+            // 
+            this.Available.HeaderText = "Available Copies";
+            this.Available.MinimumWidth = 6;
+            this.Available.Name = "Available";
+            this.Available.Width = 125;
+            // 
             // Book
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(969, 678);
+            this.Controls.Add(this.txt_price);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.btn_exit);
             this.Controls.Add(this.btn_delete);
             this.Controls.Add(this.btn_edit);
@@ -313,12 +342,15 @@
         private System.Windows.Forms.Button btn_add;
         private System.Windows.Forms.Button btn_edit;
         private System.Windows.Forms.Button btn_delete;
+        private System.Windows.Forms.Button btn_exit;
         private System.Windows.Forms.DataGridViewTextBoxColumn ISBN;
         private System.Windows.Forms.DataGridViewTextBoxColumn Title;
         private System.Windows.Forms.DataGridViewTextBoxColumn Author;
         private System.Windows.Forms.DataGridViewTextBoxColumn Category;
+        private System.Windows.Forms.DataGridViewTextBoxColumn price;
         private System.Windows.Forms.DataGridViewTextBoxColumn Total;
         private System.Windows.Forms.DataGridViewTextBoxColumn Available;
-        private System.Windows.Forms.Button btn_exit;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txt_price;
     }
 }

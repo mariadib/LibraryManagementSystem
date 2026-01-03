@@ -21,7 +21,7 @@ namespace LibraryManagementSystem
         }
         void AddBook()
         {
-            string query = $"INSERT INTO [dbo].[Books] ([ISBN],[title],[author],[CategoryId],[totalcopies] ,[availablecopies]) VALUES ('{txt_isbn.Text}','{txt_title.Text}','{txt_author.Text}','{cb_category.SelectedValue.ToString()}','{txt_total.Text}','{txt_available.Text}')";
+            string query = $"INSERT INTO [dbo].[Books] ([ISBN],[title] ,[author],[price] ,[CategoryId] ,[totalcopies],[availablecopies]) VALUES ('{txt_isbn.Text}','{txt_title.Text}','{txt_author.Text}','{txt_price.Text}','{cb_category.SelectedValue.ToString()}','{txt_total.Text}','{txt_available.Text}')";
             SqlCommand cmd = new SqlCommand(query, conn);
             try
             {
@@ -146,7 +146,7 @@ namespace LibraryManagementSystem
         }
         void EditBook()
         {
-            string query = $"UPDATE [dbo].[Books] SET [title] = '{txt_title.Text}', [author] = '{txt_author.Text}', [CategoryId] = '{cb_category.SelectedValue.ToString()}', [totalcopies] = '{txt_total.Text}', [availablecopies] = '{txt_available.Text}' WHERE ISBN = '{txt_isbn.Text}'";
+            string query = $"UPDATE [dbo].[Books] SET [title] = '{txt_title.Text}', [author] = '{txt_author.Text}',[price] = '{txt_price.Text}' ,[CategoryId] = '{cb_category.SelectedValue.ToString()}', [totalcopies] = '{txt_total.Text}', [availablecopies] = '{txt_available.Text}' WHERE ISBN = '{txt_isbn.Text}'";
             SqlCommand cmd = new SqlCommand(query, conn);
             try
             {
@@ -172,6 +172,7 @@ namespace LibraryManagementSystem
                 {
                     row.Cells["title"].Value = txt_title.Text;
                     row.Cells["author"].Value = txt_author.Text;
+                    row.Cells["price"].Value = txt_price.Text;
                     row.Cells["CategoryId"].Value = cb_category.SelectedValue.ToString();
                     row.Cells["totalcopies"].Value = txt_total.Text;
                     row.Cells["availablecopies"].Value = txt_available.Text;
