@@ -202,12 +202,6 @@
     <Compile Include="ManagenentSystem.Designer.cs">
       <DependentUpon>ManagenentSystem.cs</DependentUpon>
     </Compile>
-    <Compile Include="Penalties.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Penalties.Designer.cs">
-      <DependentUpon>Penalties.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignUp.cs">
@@ -233,9 +227,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ManagenentSystem.resx">
       <DependentUpon>ManagenentSystem.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Penalties.resx">
-      <DependentUpon>Penalties.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
