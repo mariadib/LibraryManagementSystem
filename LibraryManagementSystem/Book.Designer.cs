@@ -42,12 +42,6 @@
             this.txt_available = new System.Windows.Forms.TextBox();
             this.cb_category = new System.Windows.Forms.ComboBox();
             this.dgv_display = new System.Windows.Forms.DataGridView();
-            this.btn_add = new System.Windows.Forms.Button();
-            this.btn_edit = new System.Windows.Forms.Button();
-            this.btn_delete = new System.Windows.Forms.Button();
-            this.btn_exit = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txt_price = new System.Windows.Forms.TextBox();
             this.ISBN = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Author = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,6 +49,12 @@
             this.price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Available = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_add = new System.Windows.Forms.Button();
+            this.btn_edit = new System.Windows.Forms.Button();
+            this.btn_delete = new System.Windows.Forms.Button();
+            this.btn_exit = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txt_price = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_display)).BeginInit();
             this.SuspendLayout();
             // 
@@ -184,6 +184,56 @@
             this.dgv_display.RowTemplate.Height = 24;
             this.dgv_display.Size = new System.Drawing.Size(926, 276);
             this.dgv_display.TabIndex = 13;
+            this.dgv_display.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_display_CellContentClick);
+            // 
+            // ISBN
+            // 
+            this.ISBN.HeaderText = "ISBN";
+            this.ISBN.MinimumWidth = 6;
+            this.ISBN.Name = "ISBN";
+            this.ISBN.Width = 125;
+            // 
+            // Title
+            // 
+            this.Title.HeaderText = "Title";
+            this.Title.MinimumWidth = 6;
+            this.Title.Name = "Title";
+            this.Title.Width = 125;
+            // 
+            // Author
+            // 
+            this.Author.HeaderText = "Author";
+            this.Author.MinimumWidth = 6;
+            this.Author.Name = "Author";
+            this.Author.Width = 125;
+            // 
+            // Category
+            // 
+            this.Category.HeaderText = "Category";
+            this.Category.MinimumWidth = 6;
+            this.Category.Name = "Category";
+            this.Category.Width = 125;
+            // 
+            // price
+            // 
+            this.price.HeaderText = "Price";
+            this.price.MinimumWidth = 6;
+            this.price.Name = "price";
+            this.price.Width = 125;
+            // 
+            // Total
+            // 
+            this.Total.HeaderText = "Total Copies";
+            this.Total.MinimumWidth = 6;
+            this.Total.Name = "Total";
+            this.Total.Width = 125;
+            // 
+            // Available
+            // 
+            this.Available.HeaderText = "Available Copies";
+            this.Available.MinimumWidth = 6;
+            this.Available.Name = "Available";
+            this.Available.Width = 125;
             // 
             // btn_add
             // 
@@ -241,55 +291,6 @@
             this.txt_price.Size = new System.Drawing.Size(100, 22);
             this.txt_price.TabIndex = 19;
             // 
-            // ISBN
-            // 
-            this.ISBN.HeaderText = "ISBN";
-            this.ISBN.MinimumWidth = 6;
-            this.ISBN.Name = "ISBN";
-            this.ISBN.Width = 125;
-            // 
-            // Title
-            // 
-            this.Title.HeaderText = "Title";
-            this.Title.MinimumWidth = 6;
-            this.Title.Name = "Title";
-            this.Title.Width = 125;
-            // 
-            // Author
-            // 
-            this.Author.HeaderText = "Author";
-            this.Author.MinimumWidth = 6;
-            this.Author.Name = "Author";
-            this.Author.Width = 125;
-            // 
-            // Category
-            // 
-            this.Category.HeaderText = "Category";
-            this.Category.MinimumWidth = 6;
-            this.Category.Name = "Category";
-            this.Category.Width = 125;
-            // 
-            // price
-            // 
-            this.price.HeaderText = "Price";
-            this.price.MinimumWidth = 6;
-            this.price.Name = "price";
-            this.price.Width = 125;
-            // 
-            // Total
-            // 
-            this.Total.HeaderText = "Total Copies";
-            this.Total.MinimumWidth = 6;
-            this.Total.Name = "Total";
-            this.Total.Width = 125;
-            // 
-            // Available
-            // 
-            this.Available.HeaderText = "Available Copies";
-            this.Available.MinimumWidth = 6;
-            this.Available.Name = "Available";
-            this.Available.Width = 125;
-            // 
             // Book
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -317,6 +318,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Book";
             this.Text = "Book";
+            this.Load += new System.EventHandler(this.Book_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_display)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

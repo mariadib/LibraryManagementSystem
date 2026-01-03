@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,7 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.Data.SqlClient;
 
 namespace LibraryManagementSystem
 {
@@ -184,8 +185,46 @@ namespace LibraryManagementSystem
         {
             EditBook();
         }
+
+        private void dgv_display_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string query = "SELECT b.bookId, b.ISBN,b.title,b.author,c.CategoryName,b.price,b.totalcopies,b.totalcopies - ISNULL(t.borrowedCount, 0) AS availablecopies FROM Books b INNER JOIN Categories c ON b.CategoryId = c.CategoryId LEFT JOIN ( SELECT br.bookId, COUNT(*) AS borrowedCount FROM Borrowed br LEFT JOIN Penalty p ON br.borrowId = p.borrowId WHERE p.returnDate IS NULL GROUP BY br.bookId ) t ON b.bookId = t.bookId";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            dgv_display.DataSource = dt;
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dgv_display.Rows[e.RowIndex];
+
+                txt_isbn.Text = row.Cells["ISBN"].Value.ToString();
+                txt_title.Text = row.Cells["Title"].Value.ToString();
+                txt_author.Text = row.Cells["Author"].Value.ToString();
+                cb_category.Text = row.Cells["Category"].Value.ToString();
+                txt_price.Text = row.Cells["Price"].Value.ToString();
+                txt_total.Text = row.Cells["Total Copies"].Value.ToString();
+                txt_available.Text = row.Cells["Available Copies"].Value.ToString();
+            }
+        }
+
+         void RefreshBooks()
+        {
+            string query = "SELECT b.bookId, b.ISBN,b.title,b.author,c.CategoryName,b.price,b.totalcopies,b.totalcopies - ISNULL(t.borrowedCount, 0) AS availablecopies FROM Books b INNER JOIN Categories c ON b.CategoryId = c.CategoryId LEFT JOIN ( SELECT br.bookId, COUNT(*) AS borrowedCount FROM Borrowed br LEFT JOIN Penalty p ON br.borrowId = p.borrowId WHERE p.returnDate IS NULL GROUP BY br.bookId ) t ON b.bookId = t.bookId";
+            SqlCommand cmdRefresh = new SqlCommand(query, conn);
+            SqlDataAdapter daRefresh = new SqlDataAdapter(cmdRefresh);
+            DataTable dtRefresh = new DataTable();
+            daRefresh.Fill(dtRefresh);
+            dgv_display.DataSource = dtRefresh;
+        }
+
+        private void Book_Load(object sender, EventArgs e)
+        {
+            RefreshBooks();
+        }
     }
 }
+
 
 
 

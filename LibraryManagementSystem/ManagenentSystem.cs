@@ -46,9 +46,7 @@ namespace LibraryManagementSystem
 
         private void penaltyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Penalties overduebooks = new Penalties();
-            overduebooks.Show();
-            this.Hide();
+
         }
         void SearchBooks()
         {
