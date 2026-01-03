@@ -37,6 +37,7 @@
             this.txt_search = new System.Windows.Forms.TextBox();
             this.lv_displayresult = new System.Windows.Forms.ListView();
             this.btn_searchb = new System.Windows.Forms.Button();
+            this.btn_exitapp = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -108,11 +109,22 @@
             this.btn_searchb.UseVisualStyleBackColor = true;
             this.btn_searchb.Click += new System.EventHandler(this.btn_searchb_Click);
             // 
+            // btn_exitapp
+            // 
+            this.btn_exitapp.Location = new System.Drawing.Point(536, 298);
+            this.btn_exitapp.Name = "btn_exitapp";
+            this.btn_exitapp.Size = new System.Drawing.Size(75, 23);
+            this.btn_exitapp.TabIndex = 7;
+            this.btn_exitapp.Text = "Exit App";
+            this.btn_exitapp.UseVisualStyleBackColor = true;
+            this.btn_exitapp.Click += new System.EventHandler(this.btn_exitapp_Click);
+            // 
             // ManagenentSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btn_exitapp);
             this.Controls.Add(this.btn_searchb);
             this.Controls.Add(this.lv_displayresult);
             this.Controls.Add(this.txt_search);
@@ -139,5 +151,6 @@
         private System.Windows.Forms.TextBox txt_search;
         private System.Windows.Forms.ListView lv_displayresult;
         private System.Windows.Forms.Button btn_searchb;
+        private System.Windows.Forms.Button btn_exitapp;
     }
 }

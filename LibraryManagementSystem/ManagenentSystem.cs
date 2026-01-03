@@ -89,5 +89,11 @@ namespace LibraryManagementSystem
         {
            SearchBooks();
         }
+
+        private void btn_exitapp_Click(object sender, EventArgs e)
+        {
+            
+            Application.Exit();
+         }
     }
 }
