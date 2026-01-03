@@ -67,7 +67,7 @@ namespace LibraryManagementSystem
 
                     while (reader.Read())
                     {
-                        string bookInfo = $"{reader["title"]} by {reader["author"]}";
+                        string bookInfo = $"{reader["title"]} by {reader["author"]} costs {(decimal)reader["price"]:C2}";
                         lv_displayresult.Items.Add(bookInfo);
                     }
                 }
