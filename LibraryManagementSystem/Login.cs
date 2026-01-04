@@ -21,7 +21,7 @@ namespace LibraryManagementSystem
         }
         void loginform()
         {
-            string query = $"SELECT * FROM [dbo].[Users] WHERE username={txt_users.Text} AND password={txt_passwords.Text}";
+            string query = $"SELECT * FROM [dbo].[Users] WHERE username='{txt_users.Text}' AND password='{txt_passwords.Text}'";
             SqlCommand cmd = new SqlCommand(query, conn);
             try
             {
@@ -32,7 +32,7 @@ namespace LibraryManagementSystem
                     MessageBox.Show("Login Successful");
                     ManagenentSystem nextForm = new ManagenentSystem();
                     nextForm.Show();
-                    this.Hide();
+                    this.Close();
                 }
                 else
                 {
@@ -63,14 +63,14 @@ namespace LibraryManagementSystem
         {
             SignUp nextForm = new SignUp();
             nextForm.Show();
-            this.Hide();
+            this.Close();
         }
 
         private void lb_forgetpass_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
            Resetpass r=new Resetpass();
             r.Show();
-            this.Hide();
+            this.Close();
         }
     }
 }

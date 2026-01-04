@@ -95,7 +95,7 @@
             this.lv_displayresult.HideSelection = false;
             this.lv_displayresult.Location = new System.Drawing.Point(45, 79);
             this.lv_displayresult.Name = "lv_displayresult";
-            this.lv_displayresult.Size = new System.Drawing.Size(240, 308);
+            this.lv_displayresult.Size = new System.Drawing.Size(647, 308);
             this.lv_displayresult.TabIndex = 5;
             this.lv_displayresult.UseCompatibleStateImageBehavior = false;
             // 
@@ -111,7 +111,7 @@
             // 
             // btn_exitapp
             // 
-            this.btn_exitapp.Location = new System.Drawing.Point(536, 298);
+            this.btn_exitapp.Location = new System.Drawing.Point(475, 50);
             this.btn_exitapp.Name = "btn_exitapp";
             this.btn_exitapp.Size = new System.Drawing.Size(75, 23);
             this.btn_exitapp.TabIndex = 7;

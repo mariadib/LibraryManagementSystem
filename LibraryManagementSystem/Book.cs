@@ -19,6 +19,7 @@ namespace LibraryManagementSystem
         public Book()
         {
             InitializeComponent();
+            loadCategory();
         }
         void AddBook()
         {
@@ -41,7 +42,7 @@ namespace LibraryManagementSystem
         }
         void LoadBook()
         {
-            string query = "SELECT Books.*, Categories.CategoryId AS categId FROM Books INNER JOIN Categories ON Books.CategoryId = Categories.CategoryId SELECT Books.*, Categories.CategoryName FROM     Books INNER JOIN Categories ON Books.CategoryId = Categories.CategoryIdd";
+            string query = "SELECT Books.*, Categories.CategoryId AS categId FROM Books INNER JOIN Categories ON Books.CategoryId = Categories.CategoryId SELECT Books.*, Categories.CategoryName FROM     Books INNER JOIN Categories ON Books.CategoryId = Categories.CategoryId";
             SqlCommand cmd = new SqlCommand(query, conn);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
@@ -208,14 +209,28 @@ namespace LibraryManagementSystem
             }
         }
 
-         void RefreshBooks()
+        void RefreshBooks()
         {
-            string query = "SELECT b.bookId, b.ISBN,b.title,b.author,c.CategoryName,b.price,b.totalcopies,b.totalcopies - ISNULL(t.borrowedCount, 0) AS availablecopies FROM Books b INNER JOIN Categories c ON b.CategoryId = c.CategoryId LEFT JOIN ( SELECT br.bookId, COUNT(*) AS borrowedCount FROM Borrowed br LEFT JOIN Penalty p ON br.borrowId = p.borrowId WHERE p.returnDate IS NULL GROUP BY br.bookId ) t ON b.bookId = t.bookId";
+            string query = "SELECT b.bookId, b.ISBN,b.title,b.author,c.CategoryName,b.price,b.totalcopies,b.totalcopies - ISNULL(t.borrowedCount, 0) AS availablecopies FROM Books b INNER JOIN Categories c ON b.CategoryId = c.CategoryId LEFT JOIN ( SELECT br.bookId, COUNT(*) AS borrowedCount FROM Borrowed br LEFT JOIN Penalties p ON br.borrowId = p.borrowId WHERE p.returnDate IS NULL GROUP BY br.bookId ) t ON b.bookId = t.bookId";
             SqlCommand cmdRefresh = new SqlCommand(query, conn);
-            SqlDataAdapter daRefresh = new SqlDataAdapter(cmdRefresh);
-            DataTable dtRefresh = new DataTable();
-            daRefresh.Fill(dtRefresh);
-            dgv_display.DataSource = dtRefresh;
+            try
+            {
+                conn.Open();
+                SqlDataAdapter daRefresh = new SqlDataAdapter(cmdRefresh);
+                DataTable dtRefresh = new DataTable();
+                int v = daRefresh.Fill(dtRefresh);
+                dgv_display.DataSource = dtRefresh;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            
         }
 
         private void Book_Load(object sender, EventArgs e)
@@ -224,9 +239,3 @@ namespace LibraryManagementSystem
         }
     }
 }
-
-
-
-
-
-

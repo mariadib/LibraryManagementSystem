@@ -15,7 +15,7 @@ namespace LibraryManagementSystem
     {
 
         static string connString = "Data Source=DESKTOP-HRBJP2J\\SQLEXPRESS;" + "Initial Catalog=LibraryManagementSystem;" + "Integrated Security=True;" + "TrustServerCertificate=True";
-        SqlConnection conn = new SqlConnection(connString);
+        
         public ManagenentSystem()
         {
             InitializeComponent();
@@ -34,14 +34,14 @@ namespace LibraryManagementSystem
         {
             Book bookmanagement = new Book();
             bookmanagement.Show();                      
-            this.Hide();
+            this.Close();
         }
 
         private void borrowToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Borrow borrowedbook = new Borrow();
             borrowedbook.Show();
-            this.Hide();
+            this.Close();
         }
 
         private void penaltyToolStripMenuItem_Click(object sender, EventArgs e)
@@ -50,8 +50,12 @@ namespace LibraryManagementSystem
         }
         void SearchBooks()
         {
-            string query = $"SELECT * FROM [dbo].[Books] WHERE title LIKE '%{txt_search.Text}%'";
+
+            SqlConnection conn = new SqlConnection(connString);
+            string query = "SELECT * FROM [dbo].[Books] WHERE title LIKE @title";
             SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@title", "%" + txt_search.Text + "%");
+
             SqlDataReader reader = null;
 
             try
@@ -59,13 +63,14 @@ namespace LibraryManagementSystem
                 conn.Open();
                 reader = cmd.ExecuteReader();
 
+                lv_displayresult.Items.Clear();
+
                 if (reader.HasRows)
                 {
-                    lv_displayresult.Items.Clear();
-
                     while (reader.Read())
                     {
-                        string bookInfo = $"{reader["title"]} by {reader["author"]} costs {(decimal)reader["price"]:C2}";
+                        string bookInfo =
+                            $"{reader["title"]} by {reader["author"]} costs {(decimal)reader["price"]:C2}";
                         lv_displayresult.Items.Add(bookInfo);
                     }
                 }
@@ -76,24 +81,30 @@ namespace LibraryManagementSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show( ex.Message);
+                MessageBox.Show(ex.Message);
+                conn.Close();
             }
             finally
             {
-                if (reader != null)
-                    reader.Close(); 
-                conn.Close();       
+                if (reader != null && !reader.IsClosed)
+                    reader.Close();
+
+               conn.Close();
             }
         }
+
         private void btn_searchb_Click(object sender, EventArgs e)
         {
            SearchBooks();
         }
+        
+
 
         private void btn_exitapp_Click(object sender, EventArgs e)
         {
             
             Application.Exit();
+            
          }
     }
 }

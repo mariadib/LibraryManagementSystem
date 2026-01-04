@@ -20,15 +20,20 @@ namespace LibraryManagementSystem
             InitializeComponent();
         }
         void Resettingpass()
-        { 
-            string query = $"UPDATE [dbo].[Users] SET password={txt_newpass.Text} WHERE email={txt_email.Text}";
+        {
+            string query = "UPDATE [dbo].[Users] SET password = @password WHERE email = @Email";
             SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@password", txt_newpass.Text);
+            cmd.Parameters.AddWithValue("@Email", txt_email.Text);
 
             try
             {
                 conn.Open();
-                cmd.ExecuteNonQuery(); 
-                MessageBox.Show("Password has been reset successfully!");
+                int rowsAffected = cmd.ExecuteNonQuery();
+                if (rowsAffected > 0)
+                    MessageBox.Show("Password has been reset successfully!");
+                else
+                    MessageBox.Show("No user found with this email.");
             }
             catch (Exception ex)
             {
@@ -36,15 +41,17 @@ namespace LibraryManagementSystem
             }
             finally
             {
-                conn.Close(); 
+                conn.Close();
             }
         }
+
+        
         private void btn_reset_Click(object sender, EventArgs e)
         {
             Resettingpass();
             Login login = new Login(); 
             login.Show();                      
-            this.Hide();
+            this.Close();
         }
     }
 }

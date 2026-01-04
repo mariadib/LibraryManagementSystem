@@ -39,19 +39,10 @@
             this.btn_return = new System.Windows.Forms.Button();
             this.btn_borrow = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.Email = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Book = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Date = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.DueDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Return = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.amount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cb_bookname = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txt_amount = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.dtp_returndate = new System.Windows.Forms.DateTimePicker();
             this.btn_payfine = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.btn_exit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -145,49 +136,14 @@
             // 
             // listView1
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Email,
-            this.Book,
-            this.Date,
-            this.DueDate,
-            this.Return,
-            this.amount});
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(46, 256);
+            this.listView1.Location = new System.Drawing.Point(46, 208);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(693, 257);
+            this.listView1.Size = new System.Drawing.Size(693, 304);
             this.listView1.TabIndex = 12;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
-            // 
-            // Email
-            // 
-            this.Email.Text = "Email";
-            this.Email.Width = 125;
-            // 
-            // Book
-            // 
-            this.Book.Text = "Book";
-            this.Book.Width = 108;
-            // 
-            // Date
-            // 
-            this.Date.Text = "Date";
-            this.Date.Width = 99;
-            // 
-            // DueDate
-            // 
-            this.DueDate.Text = "DueDate";
-            this.DueDate.Width = 115;
-            // 
-            // Return
-            // 
-            this.Return.Text = "Return Date";
-            // 
-            // amount
-            // 
-            this.amount.Text = "Amount";
             // 
             // cb_bookname
             // 
@@ -196,24 +152,7 @@
             this.cb_bookname.Name = "cb_bookname";
             this.cb_bookname.Size = new System.Drawing.Size(121, 24);
             this.cb_bookname.TabIndex = 13;
-            this.cb_bookname.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(32, 180);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(55, 16);
-            this.label6.TabIndex = 14;
-            this.label6.Text = "Amount:";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
-            // 
-            // txt_amount
-            // 
-            this.txt_amount.Location = new System.Drawing.Point(131, 174);
-            this.txt_amount.Name = "txt_amount";
-            this.txt_amount.Size = new System.Drawing.Size(100, 22);
-            this.txt_amount.TabIndex = 15;
+            this.cb_bookname.SelectedIndexChanged += new System.EventHandler(this.cb_bookname_SelectedIndexChanged_1);
             // 
             // label7
             // 
@@ -242,15 +181,6 @@
             this.btn_payfine.UseVisualStyleBackColor = true;
             this.btn_payfine.Click += new System.EventHandler(this.btn_payfine_Click);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(0, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 19;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // btn_exit
             // 
             this.btn_exit.Location = new System.Drawing.Point(377, 545);
@@ -267,12 +197,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 605);
             this.Controls.Add(this.btn_exit);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.btn_payfine);
             this.Controls.Add(this.dtp_returndate);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.txt_amount);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.cb_bookname);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.btn_borrow);
@@ -305,19 +232,10 @@
         private System.Windows.Forms.Button btn_return;
         private System.Windows.Forms.Button btn_borrow;
         private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ColumnHeader Email;
-        private System.Windows.Forms.ColumnHeader Book;
-        private System.Windows.Forms.ColumnHeader Date;
-        private System.Windows.Forms.ColumnHeader DueDate;
         private System.Windows.Forms.ComboBox cb_bookname;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txt_amount;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.DateTimePicker dtp_returndate;
-        private System.Windows.Forms.ColumnHeader Return;
-        private System.Windows.Forms.ColumnHeader amount;
         private System.Windows.Forms.Button btn_payfine;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btn_exit;
     }
 }

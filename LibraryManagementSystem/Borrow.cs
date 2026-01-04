@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 
@@ -13,45 +7,52 @@ namespace LibraryManagementSystem
 {
     public partial class Borrow : Form
     {
-        static string connString = "Data Source=DESKTOP-HRBJP2J\\SQLEXPRESS;" + "Initial Catalog=LibraryManagementSystem;" + "Integrated Security=True;" + "TrustServerCertificate=True";
+        static string connString = "Data Source=DESKTOP-HRBJP2J\\SQLEXPRESS;Initial Catalog=LibraryManagementSystem;Integrated Security=True;TrustServerCertificate=True";
         SqlConnection conn = new SqlConnection(connString);
+
         public Borrow()
         {
             InitializeComponent();
+            SetupListView();
+            Loadbook();
+            LoadBorrowedBooks();
         }
+
+        void SetupListView()
+        {
+            listView1.Clear();
+            listView1.View = View.Details;
+            listView1.Columns.Add("Email", 150);
+            listView1.Columns.Add("Book", 150);
+            listView1.Columns.Add("Checkout Date", 100);
+            listView1.Columns.Add("Due Date", 100);
+            listView1.Columns.Add("Return Date", 100);
+            listView1.Columns.Add("Total Amount", 100);
+        }
+
         void borrowBook()
         {
-            string query = $"INSERT INTO [dbo].[Borrowed] ([email],[bookId],[CheckoutDate],[dueDate]) VALUES ('{txt_emails.Text}','{cb_bookname.SelectedValue.ToString()}','{dtp_checkoutdate.Value.ToString("yyyy-MM-dd")}','{dtp_duedate.Value.ToString("yyyy-MM-dd")}')";
+            string query = "INSERT INTO Borrowed (email, bookId, CheckoutDate, dueDate) VALUES (@Email,@BookId,@CheckoutDate,@DueDate)";
             SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@Email", txt_emails.Text);
+            cmd.Parameters.AddWithValue("@BookId", cb_bookname.SelectedValue);
+            cmd.Parameters.AddWithValue("@CheckoutDate", dtp_checkoutdate.Value.ToString("yyyy-MM-dd"));
+            cmd.Parameters.AddWithValue("@DueDate", dtp_duedate.Value.ToString("yyyy-MM-dd"));
             try
             {
                 conn.Open();
                 cmd.ExecuteNonQuery();
-                MessageBox.Show("The book has been borrowed ");
+                MessageBox.Show("The book has been borrowed");
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                conn.Close();
-            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            finally { conn.Close(); LoadBorrowedBooks(); }
         }
 
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btn_borrow_Click(object sender, EventArgs e)
-        {
-            borrowBook();   
-        }
+        private void btn_borrow_Click(object sender, EventArgs e) { borrowBook(); }
 
         void Loadbook()
         {
-            string query = "SELECT [bookId],[title] FROM [dbo].[Books]";
+            string query = "SELECT bookId, title FROM Books";
             SqlCommand cmd = new SqlCommand(query, conn);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
@@ -63,117 +64,160 @@ namespace LibraryManagementSystem
                 cb_bookname.ValueMember = "bookId";
                 cb_bookname.DataSource = dt;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                conn.Close();
-            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            finally { conn.Close(); }
         }
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+
+        void LoadBorrowedBooks()
         {
-            Loadbook();
-        }
-        void ReturnBook()
-        {
-            string query = $"DELETE FROM [dbo].[Borrowed] WHERE email='{txt_emails.Text}' AND bookId='{cb_bookname.SelectedValue.ToString()}'";
-            SqlCommand cmd = new SqlCommand(query, conn);
+            string query = @"SELECT Borrowed.borrowId, Borrowed.email, Books.title, Borrowed.CheckoutDate, Borrowed.dueDate, Books.price 
+                             FROM Borrowed INNER JOIN Books ON Borrowed.bookId = Books.bookId";
             try
             {
                 conn.Open();
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("The book has been returned ");
+                SqlCommand cmd = new SqlCommand(query, conn);
+                SqlDataReader reader = cmd.ExecuteReader();
+                listView1.Items.Clear();
+                while (reader.Read())
+                {
+                    string email = reader["email"].ToString();
+                    string title = reader["title"].ToString();
+                    DateTime checkout = Convert.ToDateTime(reader["CheckoutDate"]);
+                    DateTime due = Convert.ToDateTime(reader["dueDate"]);
+                    decimal price = Convert.ToDecimal(reader["price"]);
+                    int daysLate = (DateTime.Now - due).Days;
+                    decimal fine = daysLate > 0 ? daysLate * 1 : 0;
+                    decimal totalAmount = price + fine;
+
+                    ListViewItem item = new ListViewItem(email);
+                    item.SubItems.Add(title);
+                    item.SubItems.Add(checkout.ToShortDateString());
+                    item.SubItems.Add(due.ToShortDateString());
+                    item.SubItems.Add("-"); // Return date empty until returned
+                    item.SubItems.Add($"${totalAmount}");
+                    item.Tag = reader["borrowId"].ToString();
+                    listView1.Items.Add(item);
+                }
+                reader.Close();
             }
-            catch (Exception ex)
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            finally { conn.Close(); }
+        }
+
+        private void ReturnBook()
+        {
+            try
             {
-                MessageBox.Show(ex.Message);
+                string query = "SELECT borrowId, bookId, dueDate FROM Borrowed WHERE email=@Email AND bookId=@BookId";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Email", txt_emails.Text);
+                cmd.Parameters.AddWithValue("@BookId", cb_bookname.SelectedValue);
+
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    string borrowId = reader["borrowId"].ToString();
+                    string bookId = reader["bookId"].ToString();
+                    DateTime dueDate = Convert.ToDateTime(reader["dueDate"]);
+                    reader.Close();
+
+                    DateTime returnDate = dtp_returndate.Value;
+                    int daysLate = (returnDate - dueDate).Days;
+                    decimal fine = daysLate > 0 ? daysLate * 1 : 0;
+
+                    SqlCommand cmdPrice = new SqlCommand("SELECT price FROM Books WHERE bookId=@BookId", conn);
+                    cmdPrice.Parameters.AddWithValue("@BookId", bookId);
+                    decimal price = Convert.ToDecimal(cmdPrice.ExecuteScalar());
+                    decimal totalAmount = price + fine;
+
+                    SqlCommand cmdDelete = new SqlCommand("DELETE FROM Borrowed WHERE borrowId=@BorrowId", conn);
+                    cmdDelete.Parameters.AddWithValue("@BorrowId", borrowId);
+                    cmdDelete.ExecuteNonQuery();
+
+                    RemoveFromListView(txt_emails.Text, cb_bookname.Text);
+                    MessageBox.Show(daysLate > 0 ? $"Book returned late! Total charge: ${totalAmount}" : $"Book returned successfully! Total charge: ${totalAmount}");
+                }
+                else
+                {
+                    reader.Close();
+                    MessageBox.Show("No matching borrowed book found!");
+                }
             }
-            finally
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            finally { conn.Close(); LoadBorrowedBooks(); }
+        }
+
+        private void btn_return_Click(object sender, EventArgs e) { ReturnBook(); }
+
+        private void PayFine()
+        {
+            try
             {
-                conn.Close();
+                string query = "SELECT borrowId, dueDate, bookId FROM Borrowed WHERE email=@Email AND bookId=@BookId";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Email", txt_emails.Text);
+                cmd.Parameters.AddWithValue("@BookId", cb_bookname.SelectedValue);
+
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    string borrowId = reader["borrowId"].ToString();
+                    string bookId = reader["bookId"].ToString();
+                    DateTime dueDate = Convert.ToDateTime(reader["dueDate"]);
+                    reader.Close();
+
+                    DateTime returnDate = dtp_returndate.Value;
+                    int daysLate = (returnDate - dueDate).Days;
+                    decimal fine = daysLate > 0 ? daysLate * 1 : 0;
+
+                    SqlCommand cmdPrice = new SqlCommand("SELECT price FROM Books WHERE bookId=@BookId", conn);
+                    cmdPrice.Parameters.AddWithValue("@BookId", bookId);
+                    decimal price = Convert.ToDecimal(cmdPrice.ExecuteScalar());
+                    decimal totalAmount = price + fine;
+
+                    SqlCommand cmdDelete = new SqlCommand("DELETE FROM Borrowed WHERE borrowId=@BorrowId", conn);
+                    cmdDelete.Parameters.AddWithValue("@BorrowId", borrowId);
+                    cmdDelete.ExecuteNonQuery();
+
+                    RemoveFromListView(txt_emails.Text, cb_bookname.Text);
+                    MessageBox.Show($"Fine paid: ${totalAmount}");
+                }
+                else
+                {
+                    reader.Close();
+                    MessageBox.Show("No matching borrowed book found!");
+                }
             }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            finally { conn.Close(); LoadBorrowedBooks(); }
         }
 
-        private void label6_Click(object sender, EventArgs e)
+        private void btn_payfine_Click(object sender, EventArgs e) { PayFine(); }
+
+        private void RemoveFromListView(string email, string book)
         {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btn_return_Click(object sender, EventArgs e)
-        {
-         ReturnBook();
-        }
-        void PayFine()
-        {
-            string queryBorrowId = $"SELECT borrowId FROM [dbo].[Borrowed] WHERE email='{txt_emails.Text}' AND bookId='{cb_bookname.SelectedValue.ToString()}'";
-            SqlCommand cmdBorrowId = new SqlCommand(queryBorrowId, conn);
-            SqlDataReader readerBorrowId = cmdBorrowId.ExecuteReader();
-
-            string borrowId = "";
-            if (readerBorrowId.Read())
+            for (int i = listView1.Items.Count - 1; i >= 0; i--)
             {
-                borrowId = readerBorrowId["borrowId"].ToString();
+                if (listView1.Items[i].Text == email && listView1.Items[i].SubItems[1].Text == book)
+                    listView1.Items.RemoveAt(i);
             }
-            readerBorrowId.Close();
-            DateTime dueDate = dtp_duedate.Value;
-            DateTime returnDate = dtp_returndate.Value;
-            int daysLate = (returnDate - dueDate).Days;
-            decimal fineAmount = 0;
-            if (daysLate > 0)
-                fineAmount = daysLate * 1;
-
-            string updateQuery = $"UPDATE [dbo].[Penalty] SET amount={fineAmount} WHERE borrowId='{borrowId}'";
-            SqlCommand cmdUpdate = new SqlCommand(updateQuery, conn);
-            cmdUpdate.ExecuteNonQuery();
-            string deleteQuery = $"DELETE FROM [dbo].[Borrowed] WHERE borrowId='{borrowId}'";
-            SqlCommand cmdDelete = new SqlCommand(deleteQuery, conn);
-            cmdDelete.ExecuteNonQuery();
-            txt_amount.Text = fineAmount.ToString();
-            MessageBox.Show($"Fine of ${fineAmount} paid successfully!");
-
-        }
-        private void btn_payfine_Click(object sender, EventArgs e)
-        {
-            PayFine();
         }
 
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string lquery = "SELECT Borrowed.email, Books.title, Borrowed.CheckoutDate, Borrowed.dueDate, Penalties.returnDate, Penalties.amount FROM  Books INNER JOIN Borrowed ON Books.bookId = Borrowed.bookId INNER JOIN Penalties ON Borrowed.borrowId = Penalties.borrowId";
-            SqlCommand cmd = new SqlCommand(lquery, conn);
-            SqlDataReader reader = cmd.ExecuteReader();
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e) { }
 
-            while (reader.Read())
-            {
-                string line = reader["email"].ToString() + "\t" +
-                              reader["title"].ToString() + "\t" +
-                              Convert.ToDateTime(reader["CheckOutDate"]).ToShortDateString() + "\t" +
-                              Convert.ToDateTime(reader["dueDate"]).ToShortDateString() + "\t" +
-                              (reader["returnDate"] == DBNull.Value ? "-" : Convert.ToDateTime(reader["returnDate"]).ToShortDateString()) + "\t" +
-                              (reader["amount"] == DBNull.Value ? "0" : reader["amount"].ToString());
+        private void label6_Click(object sender, EventArgs e) { }
 
-                listView1.Items.Add(line);
-            }
+        private void label7_Click(object sender, EventArgs e) { }
 
-            reader.Close();
+        private void tabPage1_Click(object sender, EventArgs e) { }
 
-        }
+        private void cb_bookname_SelectedIndexChanged_1(object sender, EventArgs e) { }
 
         private void btn_exit_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show(
-             "Are you sure you want to exit?",
-             "Confirm Exit",
-             MessageBoxButtons.YesNo,
-             MessageBoxIcon.Question
-         );
+            DialogResult result = MessageBox.Show("Are you sure you want to exit?", "Confirm Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
                 ManagenentSystem re = new ManagenentSystem();

@@ -23,7 +23,7 @@ namespace LibraryManagementSystem
         void AddUser()
         {
 
-            string query = $"INSERT INTO [dbo].[Users] ([username] ,[email] ,[password]) VALUES ({txt_username.Text},{txt_emails.Text},{txt_password.Text})";
+            string query = $"INSERT INTO [dbo].[Users] ([username] ,[email] ,[password]) VALUES ('{txt_username.Text}','{txt_emails.Text}','{txt_password.Text}')";
             SqlCommand cmd = new SqlCommand(query, conn);
             try
             {
@@ -47,7 +47,7 @@ namespace LibraryManagementSystem
             AddUser();
             ManagenentSystem nextForm = new ManagenentSystem();
             nextForm.Show();
-            this.Hide();
+            this.Close();
 
         }
 
@@ -55,7 +55,7 @@ namespace LibraryManagementSystem
         {
             Login redirect = new Login();
             redirect.Show();
-            this.Hide();
+            this.Close();
         }
     }
 }

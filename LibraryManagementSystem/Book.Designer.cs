@@ -165,7 +165,7 @@
             this.cb_category.Name = "cb_category";
             this.cb_category.Size = new System.Drawing.Size(121, 24);
             this.cb_category.TabIndex = 12;
-            this.cb_category.SelectedIndexChanged += new System.EventHandler(this.cb_category_SelectedIndexChanged);
+            
             // 
             // dgv_display
             // 
@@ -184,7 +184,7 @@
             this.dgv_display.RowTemplate.Height = 24;
             this.dgv_display.Size = new System.Drawing.Size(926, 276);
             this.dgv_display.TabIndex = 13;
-            this.dgv_display.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_display_CellContentClick);
+           
             // 
             // ISBN
             // 
